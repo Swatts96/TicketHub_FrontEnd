@@ -18,14 +18,13 @@ function App() {
       >
         <div className="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75" />
         <div className="position-relative z-2 px-3">
-          <h1 className="display-4 fw-bold">Sum 41 Reunion Tour 2025</h1>
-          <p className="lead">The final mosh pit. Lock in your tickets now.</p>
         </div>
       </div>
 
       {/* Title */}
       <div className="text-center my-5 container">
-        <h2 className="fw-bold display-6">Sum 41 Reunion Tour 2025 🎟️</h2>
+        <h2 className="fw-bold display-6">Sum 41 Reunion Tour 2025</h2>
+        <p className="lead">The final mosh pit. Lock in your tickets now.</p>
         <p className="text-muted">Secure your spot before it’s sold out — limited seats available.</p>
       </div>
 
