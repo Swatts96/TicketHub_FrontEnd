@@ -24,12 +24,12 @@ export default function TicketConfirmation() {
         <div className="card-body">
           <h5 className="card-title">Ticket Details</h5>
           <ul className="list-group list-group-flush">
-            <li className="list-group-item">Quantity: {formData.quantity}</li>
-            <li className="list-group-item">Name: {formData.firstName} {formData.lastName}</li>
-            <li className="list-group-item">Email: {formData.email}</li>
-            <li className="list-group-item">Phone: {formData.phone}</li>
-            <li className="list-group-item">City: {formData.city}, {formData.province}</li>
-            <li className="list-group-item">Country: {formData.country}</li>
+            <li className="list-group-item">Quantity: {formData.Quantity}</li>
+            <li className="list-group-item">Name: {formData.FirstName} {formData.LastName}</li>
+            <li className="list-group-item">Email: {formData.Email}</li>
+            <li className="list-group-item">Phone: {formData.Phone}</li>
+            <li className="list-group-item">City: {formData.City}, {formData.Province}</li>
+            <li className="list-group-item">Country: {formData.Country}</li>
           </ul>
         </div>
       </div>
