@@ -28,19 +28,27 @@ export default function TicketForm() {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    const payload = {
+      ConcertId: 0, // Default hardcoded for now (you could make this dynamic later)
+      ...data
+    };
+  
+    console.log("Submitting payload:", payload);
+  
     try {
       const response = await fetch("https://nscc-0292233-tickethub-ckcdbrhvf7cxbxc2.canadacentral-01.azurewebsites.net/api/customers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
-
-      // Validation
+  
       if (response.ok) {
         navigate('/confirmation', { state: { formData: data } });
-            } else {
+      } else {
+        const errText = await response.text();
+        console.error("Server returned error:", errText);
         alert("Failed to submit ticket. Please try again.");
       }
     } catch (error) {
