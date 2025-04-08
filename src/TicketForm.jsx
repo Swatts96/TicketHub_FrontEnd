@@ -1,62 +1,59 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const TicketForm = () => {
   const [formData, setFormData] = useState({
-    ConcertId: 1,
-    Email: '',
-    FirstName: '',
-    LastName: '',
-    Phone: '',
-    Quantity: 1,
-    CreditCard: '',
-    Expiration: '',
-    SecurityCode: '',
-    Address: '',
-    City: '',
-    Province: '',
-    PostalCode: '',
-    Country: ''
-  });
+    email: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+    creditCard: '',
+    expiration: '',
+    securityCode: '',
+    address: '',
+    city: '',
+    province: '',
+    postalCode: '',
+    country: '',
+  })
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await fetch('https://<your-api-endpoint>', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      if (res.ok) {
-        alert('Ticket submitted!');
-      } else {
-        alert('Failed to submit');
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('Submitting:', formData)
+    // POST to API logic here
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="ticket-form">
-      <input name="Email" placeholder="Email" onChange={handleChange} required />
-      <input name="FirstName" placeholder="First Name" onChange={handleChange} required />
-      <input name="LastName" placeholder="Last Name" onChange={handleChange} required />
-      <input name="Phone" placeholder="Phone" onChange={handleChange} required />
-      <input name="CreditCard" placeholder="Credit Card" onChange={handleChange} required />
-      <input name="Expiration" placeholder="MM/YY" onChange={handleChange} required />
-      <input name="SecurityCode" placeholder="CVV" onChange={handleChange} required />
-      <input name="Address" placeholder="Address" onChange={handleChange} required />
-      <input name="City" placeholder="City" onChange={handleChange} required />
-      <input name="Province" placeholder="Province" onChange={handleChange} required />
-      <input name="PostalCode" placeholder="Postal Code" onChange={handleChange} required />
-      <input name="Country" placeholder="Country" onChange={handleChange} required />
-      <button type="submit">Purchase Ticket</button>
-    </form>
-  );
-};
+    <form
+      onSubmit={handleSubmit}
+      className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-white"
+    >
+      <input name="email" placeholder="Email" onChange={handleChange} className="input" />
+      <input name="firstName" placeholder="First Name" onChange={handleChange} className="input" />
+      <input name="lastName" placeholder="Last Name" onChange={handleChange} className="input" />
+      <input name="phone" placeholder="Phone" onChange={handleChange} className="input" />
+      <input name="creditCard" placeholder="Credit Card" onChange={handleChange} className="input" />
+      <input name="expiration" placeholder="MM/YY" onChange={handleChange} className="input" />
+      <input name="securityCode" placeholder="CVV" onChange={handleChange} className="input" />
+      <input name="address" placeholder="Address" onChange={handleChange} className="input" />
+      <input name="city" placeholder="City" onChange={handleChange} className="input" />
+      <input name="province" placeholder="Province" onChange={handleChange} className="input" />
+      <input name="postalCode" placeholder="Postal Code" onChange={handleChange} className="input" />
+      <input name="country" placeholder="Country" onChange={handleChange} className="input" />
 
-export default TicketForm;
+      <div className="md:col-span-2 text-right">
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded mt-2 transition"
+        >
+          Purchase Ticket
+        </button>
+      </div>
+    </form>
+  )
+}
+
+export default TicketForm
