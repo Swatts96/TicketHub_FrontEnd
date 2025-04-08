@@ -24,8 +24,8 @@ function App() {
       {/* Title */}
       <div className="text-center my-5 container">
         <h2 className="fw-bold display-6">Sum 41 Reunion Tour 2025</h2>
-        <p className="lead">The final mosh pit. Lock in your tickets now.</p>
-        <p className="text-muted">Secure your spot before it’s sold out — limited seats available.</p>
+        <p className="text-white">The final mosh pit. Lock in your tickets now.</p>
+        <p className="text-white">Secure your spot before it’s sold out — limited seats available.</p>
       </div>
 
       {/* Form + Poster Row */}
