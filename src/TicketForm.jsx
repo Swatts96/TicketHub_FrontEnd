@@ -58,26 +58,48 @@ export default function TicketForm() {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    const mappedData = {
+      ConcertId: 0, // hardcoded for now
+      Email: data.email,
+      FirstName: data.firstName,
+      LastName: data.lastName,
+      Phone: data.phone,
+      Quantity: data.quantity,
+      CreditCard: data.creditCard,
+      Expiration: data.expiration,
+      SecurityCode: data.securityCode,
+      Address: data.address,
+      City: data.city,
+      Province: data.province,
+      PostalCode: data.postalCode,
+      Country: data.country,
+    };
+  
     try {
-      const response = await fetch("https://nscc-0292233-tickethub-ckcdbrhvf7cxbxc2.canadacentral-01.azurewebsites.net/api/customers", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
+      const response = await fetch(
+        "https://nscc-0292233-tickethub-ckcdbrhvf7cxbxc2.canadacentral-01.azurewebsites.net/api/customers",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(mappedData),
+        }
+      );
+  
       if (response.ok) {
-        navigate("/confirmation", { state: { formData: data } });
+        navigate("/confirmation", { state: { formData: mappedData } });
       } else {
-        alert("Failed to submit ticket. Please try again.");
+        const errorText = await response.text();
+        console.error("Failed to submit:", errorText);
+        alert("Server error:\n" + errorText);
       }
     } catch (error) {
       console.error("Submission error:", error);
       alert("An error occurred. Check console for details.");
     }
   };
-
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="needs-validation row g-3" noValidate>
       {[
