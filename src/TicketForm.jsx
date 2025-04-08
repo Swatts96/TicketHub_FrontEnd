@@ -5,20 +5,58 @@ import { useNavigate } from "react-router-dom";
 
 // Schema
 const schema = yup.object({
-  email: yup.string().email("Invalid email").required(),
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
-  phone: yup.string().required(),
-  quantity: yup.number().min(1).required(),
-  creditCard: yup.string().matches(/^\d{16}$/, "Must be 16 digits").required(),
-  expiration: yup.string().matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "MM/YY").required(),
-  securityCode: yup.string().length(3, "3 digits").required(),
-  address: yup.string().required(),
-  city: yup.string().required(),
-  province: yup.string().required(),
-  postalCode: yup.string().required(),
-  country: yup.string().required()
+  email: yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+
+  firstName: yup.string()
+    .matches(/^[A-Za-z\s\-]+$/, "First name must contain only letters")
+    .required("First name is required"),
+
+  lastName: yup.string()
+    .matches(/^[A-Za-z\s\-]+$/, "Last name must contain only letters")
+    .required("Last name is required"),
+
+  phone: yup.string()
+    .matches(/^\d{10}$/, "Phone must be exactly 10 digits")
+    .required("Phone is required"),
+
+  quantity: yup.number()
+    .min(1, "At least 1 ticket is required")
+    .required("Quantity is required"),
+
+  creditCard: yup.string()
+    .matches(/^\d{16}$/, "Credit card must be 16 digits")
+    .required("Credit card number is required"),
+
+  expiration: yup.string()
+    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "Expiration must be in MM/YY format")
+    .required("Expiration is required"),
+
+  securityCode: yup.string()
+    .matches(/^\d{3}$/, "CVV must be 3 digits")
+    .required("CVV is required"),
+
+  address: yup.string()
+    .required("Address is required"),
+
+  city: yup.string()
+    .matches(/^[A-Za-z\s\-]+$/, "City must contain only letters")
+    .required("City is required"),
+
+  province: yup.string()
+    .matches(/^[A-Za-z]{2}$/, "Use 2-letter province code (e.g., NS, ON)")
+    .required("Province is required"),
+
+  postalCode: yup.string()
+    .matches(/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/, "Invalid Canadian postal code format")
+    .required("Postal code is required"),
+
+  country: yup.string()
+    .matches(/^[A-Za-z\s\-]+$/, "Country must contain only letters")
+    .required("Country is required")
 });
+
 
 export default function TicketForm() {
   const { register, handleSubmit, formState: { errors } } = useForm({
