@@ -48,11 +48,11 @@ export default function TicketForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="needs-validation row g-3" noValidate>
       {[
+        { name: 'quantity', label: 'Quantity', type: 'number' },
         { name: 'email', label: 'Email', type: 'email' },
         { name: 'firstName', label: 'First Name' },
         { name: 'lastName', label: 'Last Name' },
         { name: 'phone', label: 'Phone' },
-        { name: 'quantity', label: 'Quantity', type: 'number' },
         { name: 'creditCard', label: 'Credit Card' },
         { name: 'expiration', label: 'MM/YY' },
         { name: 'securityCode', label: 'CVV' },
