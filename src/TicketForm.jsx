@@ -17,10 +17,22 @@ const schema = yup.object({
     .string()
     .matches(/^\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}$/, "Enter a valid 16-digit card number")
     .required("Credit card required"),
-  expiration: yup
+    expiration: yup
     .string()
-    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "Enter in MM/YY format")
-    .required("Expiration date required"),
+    .required("Expiration date is required")
+    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "Format must be MM/YY")
+    .test("notExpired", "Card is expired", function (value) {
+      if (!value) return false;
+  
+      const [expMonth, expYear] = value.split("/").map(Number);
+      const now = new Date();
+      const currentMonth = now.getMonth() + 1;
+      const currentYear = now.getFullYear() % 100; // Get last 2 digits
+  
+      return (
+        expYear > currentYear || (expYear === currentYear && expMonth >= currentMonth)
+      );
+    }),
   securityCode: yup
     .string()
     .matches(/^\d{3}$/, "Enter a 3-digit CVV")
@@ -91,12 +103,12 @@ export default function TicketForm() {
             id={name}
             {...register(name)}
           />
-          <div className="invalid-feedback">{errors[name]?.message}</div>
+          <div className="invalid-feedback text-dark">{errors[name]?.message}</div>
         </div>
       ))}
 
       <div className="col-12 text-center mt-3">
-        <button type="submit" className="btn btn-dark px-4">
+        <button type="submit" className="btn btn-primary px-4">
           Purchase Ticket
         </button>
       </div>

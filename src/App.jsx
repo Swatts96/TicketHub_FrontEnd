@@ -21,9 +21,6 @@ function HomeLayout() {
           position: 'relative',
         }}
       >
-        <div className="position-relative z-2 px-3 text-center">
-          <h1 className="display-4 fw-bold text-white">Sum 41 Reunion Tour 2025 🎸</h1>
-        </div>
       </div>
 
       {/* Info */}
@@ -32,6 +29,7 @@ function HomeLayout() {
           Secure your spot before it’s sold out — limited seats available.
         </p>
       </div>
+      
 
       {/* Form + Poster Row */}
       <div className="container my-5">
