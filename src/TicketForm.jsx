@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 // Schema
 const schema = yup.object({
@@ -22,7 +23,9 @@ const schema = yup.object({
 export default function TicketForm() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
+    
   });
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -33,10 +36,11 @@ export default function TicketForm() {
         },
         body: JSON.stringify(data),
       });
+
       // Validation
       if (response.ok) {
-        alert("Purchase submitted successfully!");
-      } else {
+        navigate('/confirmation', { state: { formData: data } });
+            } else {
         alert("Failed to submit ticket. Please try again.");
       }
     } catch (error) {

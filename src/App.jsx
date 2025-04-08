@@ -1,13 +1,15 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import TicketForm from './TicketForm'
-import './App.css' // keep your own overrides if needed
+import TicketConfirmation from './TicketConfirmation'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import './App.css'
 
-
-function App() {
+function HomeLayout() {
   return (
     <div className="bg-dark text-white min-vh-100 d-flex flex-column">
       <Header />
+
       {/* Hero */}
       <div
         className="d-flex align-items-center justify-content-center"
@@ -19,14 +21,16 @@ function App() {
           position: 'relative',
         }}
       >
-        <div className="position-absolute top-0 start-0 w-100 h-100" />
-        <div className="position-relative z-2 px-3">
+        <div className="position-relative z-2 px-3 text-center">
+          <h1 className="display-4 fw-bold text-white">Sum 41 Reunion Tour 2025 🎸</h1>
         </div>
       </div>
 
       {/* Info */}
       <div className="text-center my-5 container">
-        <p className="text-white">Secure your spot before it’s sold out — limited seats available.</p>
+        <p className="text-white">
+          Secure your spot before it’s sold out — limited seats available.
+        </p>
       </div>
 
       {/* Form + Poster Row */}
@@ -39,7 +43,7 @@ function App() {
             </div>
           </div>
 
-          {/* Image */}
+          {/* Poster Image */}
           <div className="col-md-6 text-center">
             <img
               src="/sum412.jpg"
@@ -49,23 +53,33 @@ function App() {
             />
           </div>
         </div>
-        <div
+      </div>
+
+      {/* Footer Banner */}
+      <div
         className="d-flex align-items-center justify-content-center"
         style={{
           backgroundImage: `url("/sum41header.jpg")`,
-          backgroundSize: '',
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
           height: '30vh',
-          position: 'relative',
           marginTop: '30px'
         }}
       ></div>
-      {/* Footer */}
-      <Footer />
-      </div>
 
-      
+      <Footer />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomeLayout />} />
+        <Route path="/confirmation" element={<TicketConfirmation />} />
+      </Routes>
+    </Router>
   )
 }
 
