@@ -1,6 +1,6 @@
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 // Schema
 const schema = yup.object({
@@ -17,20 +17,36 @@ const schema = yup.object({
   province: yup.string().required(),
   postalCode: yup.string().required(),
   country: yup.string().required()
-})
+});
 
 export default function TicketForm() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
-  })
+  });
 
-  const onSubmit = (data) => {
-    console.log("VALID FORM DATA", data)
-    // POST request goes here
-  }
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch("https://nscc-0292233-tickethub-ckcdbrhvf7cxbxc2.canadacentral-01.azurewebsites.net/api/customers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      // Validation
+      if (response.ok) {
+        alert("Purchase submitted successfully!");
+      } else {
+        alert("Failed to submit ticket. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting ticket:", error);
+      alert("An error occurred.");
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="row g-3">
+    <form onSubmit={handleSubmit(onSubmit)} className="needs-validation row g-3" noValidate>
       {[
         { name: 'email', label: 'Email', type: 'email' },
         { name: 'firstName', label: 'First Name' },
@@ -66,5 +82,5 @@ export default function TicketForm() {
         </button>
       </div>
     </form>
-  )
+  );
 }
